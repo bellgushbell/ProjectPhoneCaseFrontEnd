@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+/* @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap'); */
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.hover:shadow-2xl {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+
+/* styles.css */
+.shadow-tilted {
+  box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+.shadow-tilted-hover:hover {
+  box-shadow: 12px 12px 20px rgba(0, 0, 0, 0.4);
+}

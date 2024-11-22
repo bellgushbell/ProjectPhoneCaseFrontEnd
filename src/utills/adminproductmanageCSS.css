@@ -1,0 +1,76 @@
+.border-gradient {
+    border: 3px solid transparent;
+    /* ขอบบาง */
+    border-radius: 30px;
+    background-image: linear-gradient(45deg, rgba(0, 0, 255, 0.5), rgba(128, 128, 128, 0.5), rgba(128, 0, 128, 0.5), rgba(255, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    display: flex;
+    /* เปลี่ยนเป็น flex */
+    flex-direction: column;
+    /* แนวตั้ง */
+    justify-content: space-between;
+    /* จัดระยะห่างระหว่างเด็ก */
+    align-items: stretch;
+    /* ขยายให้เต็มที่ */
+    box-sizing: border-box;
+    padding: 0;
+    /* ไม่ให้ padding */
+    margin: 10px;
+    /* เพิ่มระยะห่างระหว่างการ์ด */
+    transition: transform 0.3s, box-shadow 0.3s;
+    /* การเปลี่ยนแปลงเมื่อ hover */
+}
+
+.border-gradient:hover {
+    transform: scale(1.05);
+    /* ขยายเมื่อ hover */
+    box-shadow:
+        0 0 10px rgba(255, 0, 0, 1),
+        /* แดง */
+        0 0 0.5px rgba(255, 127, 0, 1),
+        /* ส้ม */
+        0 0 1px rgba(255, 255, 0, 1),
+        /* เหลือง */
+        0 0 2px rgba(0, 255, 0, 1),
+        /* เขียว */
+        0 0 3px rgba(0, 255, 255, 1),
+        /* น้ำเงินเขียว */
+        0 0 4px rgba(0, 0, 255, 1),
+        /* น้ำเงิน */
+        0 0 5px rgba(127, 0, 255, 1);
+    /* ม่วง */
+}
+
+.inner-card {
+    background: white;
+    /* สีพื้นหลังการ์ด */
+    border-radius: 30px;
+    width: 100%;
+    /* ขยายเต็มที่ */
+    height: auto;
+    /* ยืดหยุ่นตามเนื้อหา */
+    text-align: center;
+    /* จัดข้อความกลาง */
+    padding: 20px;
+    /* ระยะห่างภายใน */
+    box-sizing: border-box;
+    /* ไม่ให้ขอบเบี้ยว */
+    margin: 0;
+    /* ไม่มี margin เพื่อให้การ์ดเต็มที่ */
+    flex: 1;
+    /* ทำให้ขยายเต็มที่ใน container */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 คอลัมน์ในหน้าจอเล็ก */
+    }
+}
+
+@media (max-width: 480px) {
+    .grid {
+        grid-template-columns: 1fr;
+        /* 1 คอลัมน์ในหน้าจอเล็กมาก */
+    }
+}

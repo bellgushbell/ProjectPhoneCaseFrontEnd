@@ -1,0 +1,15 @@
+/* ปรับแต่งปุ่มวงกลม (indicator dots) */
+.carousel .control-dots .dot {
+    background-color: black;
+    /* เปลี่ยนปุ่มเป็นสีดำ */
+    width: 12px;
+    height: 12px;
+    margin: 0 8px;
+    opacity: 1;
+    /* ให้ปุ่มเด่นชัด */
+}
+
+.carousel .control-dots .dot.selected {
+    background-color: gray;
+    /* สีของปุ่มที่ถูกเลือก */
+}

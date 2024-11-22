@@ -1,0 +1,38 @@
+.border-gradient {
+    border: 3px solid transparent;
+    border-radius: 30px;
+    background-image: linear-gradient(45deg, rgba(0, 0, 255, 0.5), rgba(128, 128, 128, 0.5), rgba(128, 0, 128, 0.5), rgba(255, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 10px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.border-gradient:hover {
+    transform: scale(1.05) translateY(-10px);
+    /* เลื่อนขึ้นเมื่อ hover */
+    box-shadow:
+        0 0 10px rgba(255, 0, 0, 1),
+        0 0 0.5px rgba(255, 127, 0, 1),
+        0 0 1px rgba(255, 255, 0, 1),
+        0 0 2px rgba(0, 255, 0, 1),
+        0 0 3px rgba(0, 255, 255, 1),
+        0 0 4px rgba(0, 0, 255, 1),
+        0 0 5px rgba(127, 0, 255, 1);
+}
+
+.inner-card {
+    background: white;
+    border-radius: 30px;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    margin: 0;
+    flex: 1;
+}

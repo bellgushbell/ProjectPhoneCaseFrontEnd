@@ -1,0 +1,28 @@
+.button-container {
+    display: inline-block;
+    cursor: pointer;
+    background-color: transparent;
+    /* ตั้งพื้นหลังให้โปร่งใส */
+    border: none;
+    /* ลบกรอบปุ่ม */
+    outline: none;
+    /* ลบเส้นขอบที่อาจเกิดจาก focus */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border-radius: 25px;
+}
+
+.button-container:hover {
+    transform: translateY(-5px);
+    /* ยกปุ่มขึ้นเมื่อ hover */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    /* เพิ่มเงานูน */
+}
+
+.button-container img {
+    display: block;
+    /* ปรับให้ภาพเต็มพื้นที่ */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* ทำให้ภาพพอดีปุ่ม */
+}
