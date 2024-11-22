@@ -11,6 +11,7 @@ import upload1 from '../../assets/upload1.gif';
 import { motion, useAnimation } from 'framer-motion';
 import slidebarpic from '../../assets/slideright.gif'
 
+const URL = import.meta.env.VITE_API_URL
 export default function PaymentForm() {
     const { orderId } = useParams(); // ดึงค่า orderId จาก URL
     const token = useAuthStore(state => state.token);
@@ -39,7 +40,7 @@ export default function PaymentForm() {
         try {
             setLoadingSendingPayment(true);
             await new Promise(resolve => setTimeout(resolve, 400));
-            const response = await axios.post(`http://localhost:8001/payment/order/${orderId}/payment`,
+            const response = await axios.post(`${URL}/payment/order/${orderId}/payment`,
                 formData,
                 {
                     headers: {

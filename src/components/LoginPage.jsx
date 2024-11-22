@@ -10,6 +10,7 @@ import LoadingLogin from './loading/Loading-login';
 import { motion } from 'framer-motion'; // นำเข้า motion
 import { validateLogin } from '../utills/validator';
 
+
 const LoginPage = () => {
     const navigate = useNavigate();
     const [formErrors, setFormErrors] = useState({});

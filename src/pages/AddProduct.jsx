@@ -9,6 +9,7 @@ import AddproductButton from '../assets/addproductbutton.gif'
 
 import bgaddproduct from '../assets/gradientbg5.gif'
 
+const URL = import.meta.env.VITE_API_URL
 export default function AddProduct() {
     const [loadingAddproduct, setloadingAddproduct] = useState(false);
     const token = useAuthStore(state => state.token);
@@ -27,7 +28,7 @@ export default function AddProduct() {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await axios.get('http://localhost:8001/admin/categories', {
+                const response = await axios.get(`${URL}/admin/categories`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setCategories(response.data);
@@ -60,7 +61,7 @@ export default function AddProduct() {
                 body.append('image', file);
             }
 
-            const rs = await axios.post("http://localhost:8001/admin/create-product", body, {
+            const rs = await axios.post(`${URL}/admin/create-product`, body, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             toast.success("Create Product Success📥");

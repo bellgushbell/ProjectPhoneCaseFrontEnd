@@ -4,6 +4,7 @@ import useAuthStore from '../../stores/authStore';
 import { motion } from 'framer-motion';
 import AdminMangeOrderDetailModal from './AdminMangeOrderDetailModal';
 import { DeleteUserBin } from '../../icons';
+const URL = import.meta.env.VITE_API_URL
 
 export default function AdminManageOrder() {
     const [orders, setOrders] = useState([]);
@@ -13,7 +14,7 @@ export default function AdminManageOrder() {
 
     const fetchOrders = async () => { //จากตารางออเดอถึงชื่อโปรดัก
         try {
-            const response = await axios.get('http://localhost:8001/admin/manage-orders', {
+            const response = await axios.get(`${URL}/admin/manage-orders`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setOrders(response.data.orders);
@@ -28,7 +29,7 @@ export default function AdminManageOrder() {
 
     const handleStatusChange = async (orderId, newStatus) => {
         try {
-            await axios.patch(`http://localhost:8001/admin/manage-orders/${orderId}`, {
+            await axios.patch(`${URL}/admin/manage-orders/${orderId}`, {
                 status: newStatus
             }, {
                 headers: { Authorization: `Bearer ${token}` }
@@ -43,7 +44,7 @@ export default function AdminManageOrder() {
 
     const handleDeleteOrder = async (orderId) => {
         try {
-            await axios.delete(`http://localhost:8001/admin/manage-orders/${orderId}`, {
+            await axios.delete(`${URL}/admin/manage-orders/${orderId}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 

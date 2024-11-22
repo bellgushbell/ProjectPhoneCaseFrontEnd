@@ -20,6 +20,7 @@ const ShopProductAll = () => {
     const [animateItemId, setAnimateItemId] = useState(null);
     const [cartPosition, setCartPosition] = useState({ x: 0, y: 0 });
     const cartIconRef = useRef(null); //ตัวแปร ref ที่ใช้เก็บการอ้างอิงถึง DOM element ของไอคอนตะกร้าสินค้า เริ่มต้นเป็น null
+    const URL = import.meta.env.VITE_API_URL
 
     const filteredProducts = data.filter(product =>
         product.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -28,7 +29,7 @@ const ShopProductAll = () => {
     // console.log(filteredProducts)
     const fetchProducts = async () => {
         try {
-            const response = await axios.get("http://localhost:8001/product", {
+            const response = await axios.get(`${URL}/product`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
@@ -52,11 +53,11 @@ const ShopProductAll = () => {
             if (existingCartItem) { //ถ้าเป็นตัวที่กดซ้ำ //มีอยู่แล้ว
                 updateCartQuantityOnAdd(productId, 1)  //เพิ่มจำนวน
             } else { //ถ้าไม่ใช่ตัวที่กดซ้ำ หรือที่มีอยุ่แล้ว or กดครั้งแรก 
-                await axios.post("http://localhost:8001/cart", { productId, amount: 1 }, {
+                await axios.post(`${URL}/cart`, { productId, amount: 1 }, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
 
-                const response = await axios.get("http://localhost:8001/cart", { //ดึงcartItem มาแสดง
+                const response = await axios.get(`${URL}/cart`, { //ดึงcartItem มาแสดง
                     headers: { Authorization: `Bearer ${token}` }
                 });
 
@@ -91,7 +92,7 @@ const ShopProductAll = () => {
         setCartItems(updatedItems); // รายการสินค้าใหม่ที่มีจำนวนที่ถูกอัปเดตแล้ว 
 
         try {
-            await axios.patch(`http://localhost:8001/cart/${productId}`, { amount }, {
+            await axios.patch(`${URL}/cart/${productId}`, { amount }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
         } catch (err) {

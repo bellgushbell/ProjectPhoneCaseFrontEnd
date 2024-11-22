@@ -7,6 +7,7 @@ import { motion } from 'framer-motion'; // นำเข้า `motion` จาก
 
 // ลงทะเบียน modules ของ Chart.js เพื่อให้สามารถใช้ features ที่ต้องการได้
 Chart.register(...registerables);
+const URL = import.meta.env.VITE_API_URL
 
 const AdminDashboard = () => {
     const token = useAuthStore(state => state.token); // ดึง token จาก authStore เพื่อใช้ในการ authenticate API requests
@@ -20,7 +21,7 @@ const AdminDashboard = () => {
         const fetchSalesData = async () => {
             try {
                 // เรียก API เพื่อดึงข้อมูลยอดขาย
-                const response = await axios.get('http://localhost:8001/dashboard/sales', {
+                const response = await axios.get(`${URL}/dashboard/sales`, {
                     headers: { Authorization: `Bearer ${token}` } // ส่ง token ใน headers เพื่อ authenticate
                 });
                 const salesData = response.data;
@@ -50,7 +51,7 @@ const AdminDashboard = () => {
         // ฟังก์ชันสำหรับดึงข้อมูลสินค้าที่ขายดีที่สุด
         const fetchBestSellingProducts = async () => {
             try {
-                const response = await axios.get('http://localhost:8001/dashboard/best-selling-products', {
+                const response = await axios.get(`${URL}/dashboard/best-selling-products`, {
                     headers: { Authorization: `Bearer ${token}` } // ส่ง token ใน headers เพื่อ authenticate
                 });
                 setBestSellingProducts(response.data); // ตั้งค่า state ของสินค้าที่ขายดีที่สุด
@@ -62,7 +63,7 @@ const AdminDashboard = () => {
         // ฟังก์ชันสำหรับดึงข้อมูลวิธีการชำระเงินยอดนิยม
         const fetchPaymentMethodsData = async () => {
             try {
-                const response = await axios.get('http://localhost:8001/dashboard/popular-payment-methods', {
+                const response = await axios.get(`${URL}/dashboard/popular-payment-methods`, {
                     headers: { Authorization: `Bearer ${token}` } // ส่ง token ใน headers เพื่อ authenticate
                 });
                 setPopularPaymentMethods({
@@ -91,7 +92,7 @@ const AdminDashboard = () => {
         // ฟังก์ชันสำหรับดึงข้อมูลตะกร้าสินค้าที่ยังไม่ได้เช็คเอาท์
         const fetchNonCheckedOutCarts = async () => {
             try {
-                const response = await axios.get('http://localhost:8001/dashboard/non-checked-out-carts', {
+                const response = await axios.get(`${URL}/dashboard/non-checked-out-carts`, {
                     headers: { Authorization: `Bearer ${token}` } // ส่ง token ใน headers เพื่อ authenticate
                 });
                 setNonCheckedOutCarts(response.data); // ตั้งค่า state ของตะกร้าสินค้าที่ยังไม่ได้เช็คเอาท์

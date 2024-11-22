@@ -12,6 +12,7 @@ import LoadingCheckout from './loading/Loading-checkOutclick'
 import checkoutGif from '../assets/checkout2.gif';
 import Swal from 'sweetalert2';
 import { toast } from "react-toastify";
+const URL = import.meta.env.VITE_API_URL
 
 function CartPage() {
     const [cartItems, setCartItems] = useState([]);
@@ -27,12 +28,12 @@ function CartPage() {
     const countaddToCart = useCartStore(state => state.countaddToCart);
     const countresetCart = useCartStore(state => state.countresetCart);
     const countdelCart = useCartStore(state => state.countdelCart)
-
+    const URL = import.meta.env.VITE_API_URL
 
     const fetchCartItems = async () => { //ตารางCartItems
         try {
 
-            const response = await axios.get('http://localhost:8001/cart', {
+            const response = await axios.get(`${URL}/cart`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             const items = response.data.cartItems;
@@ -100,7 +101,7 @@ function CartPage() {
             if (result.isConfirmed) { // ถ้าผู้ใช้กดยืนยัน
                 try {
 
-                    await axios.delete(`http://localhost:8001/cart/${id}`, { // ส่งคำขอลบไปยัง API
+                    await axios.delete(`${URL}/cart/${id}`, { // ส่งคำขอลบไปยัง API
                         headers: { Authorization: `Bearer ${token}` }
                     });
                     setCartItems(cartItems.filter((item) => item.productId !== id))  // อัปเดต cartItems โดยกรองรายการที่ถูกลบออก
@@ -134,7 +135,7 @@ function CartPage() {
         // ส่ง request ไปที่ backend เพื่ออัปเดตในฐานข้อมูลด้วย
         try {
 
-            await axios.patch(`http://localhost:8001/cart/${productId}`, { amount }, {
+            await axios.patch(`${URL}/ cart / ${productId}`, { amount }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
         } catch (err) {
@@ -149,7 +150,7 @@ function CartPage() {
         try {
             setLoadingCheckout(true);
             await new Promise(resolve => setTimeout(resolve, 500));
-            const saveorder = await axios.post(`http://localhost:8001/order/save`, {}, {
+            const saveorder = await axios.post(`${URL}/ order / save`, {}, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
@@ -164,7 +165,7 @@ function CartPage() {
             console.log(orderSummary.orderId);
             toast.success("สั่งซื้อสินค้าสำเร็จ!");
             countresetCart(); //รีตระกร้า
-            navigate(`/user/order/${orderSummary.orderId}`); //ใช้orderId ที่ได้จาก orderSummary.orderId ของ saveorder.data
+            navigate(`/ user / order / ${orderSummary.orderId}`); //ใช้orderId ที่ได้จาก orderSummary.orderId ของ saveorder.data
         } catch (err) {
             const errMsg = err?.response?.data?.message || err.message; // ใช้ .message เพื่อดึงข้อความผิดพลาด
             Swal.fire({

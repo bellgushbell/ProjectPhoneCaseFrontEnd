@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import useUserStore from '../stores/authStore'
 import { Navigate } from 'react-router-dom'
-import { CurrentUser } from '../components/currentuser'
+import { CurrentUser } from '../components/Currentuser'
 import Loading from '../components/loading/Loading-login'
 
 
@@ -39,7 +39,7 @@ const ProtectRoute = ({ element, allow }) => {
         }
     }
     if (isAllowed === null) {
-        return <Loading /> //ทำloading 1 จังหวะเฉยๆ 
+        return <Loading /> //ทำloading 1 จังหวะเฉยๆ zzz
     }
 
     if (!isAllowed) {

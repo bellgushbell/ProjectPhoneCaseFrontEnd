@@ -4,6 +4,7 @@ import useAuthStore from '../../stores/authStore';
 import uploadprofilebutton from '../../assets/uploadprofile.gif'
 import LoadinguploadProfile from '../loading/LoadingUpload-userProfile'
 
+const URL = import.meta.env.VITE_API_URL
 const UploadProfilePicture = ({ onUpdateAvatar }) => {
     const [avatar, setAvatar] = useState(null);
     const token = useAuthStore(state => state.token);
@@ -24,7 +25,7 @@ const UploadProfilePicture = ({ onUpdateAvatar }) => {
         formData.append('avatar', avatar);
         setLoadingUploadProfilePic(true) // แสดงสถานะการโหลดเมื่อเริ่มอัปโหลด
         try {
-            const response = await axios.post('http://localhost:8001/user/uploadprofilepic', formData, {
+            const response = await axios.post(`${URL}/user/uploadprofilepic`, formData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data',

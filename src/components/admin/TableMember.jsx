@@ -5,6 +5,7 @@ import { listMember, removeMember, UpdateRolemember } from '../../api/member';
 import { DeleteUserBin } from '../../icons';
 import { toast } from 'react-toastify';
 
+
 export default function TableMember({ currentUser }) {
     const [member, setMember] = useState([]);
     const token = useAuthStore(state => state.token);

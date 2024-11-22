@@ -12,6 +12,7 @@ import AddtocartButton from '../assets/addtocartbutton.gif';
 
 import { toast } from 'react-toastify';
 import klaxon from '../assets/recommend2.gif'
+const URL = import.meta.env.VITE_API_URL
 const RecommendedProducts = () => {
     const token = useAuthStore(state => state.token);
     const [data, setData] = useState([]);
@@ -20,10 +21,11 @@ const RecommendedProducts = () => {
     const [cartItems, setCartItems] = useState([]);
     const countaddToCart = useCartStore(state => state.countaddToCart);
 
+
     const fetchProducts = async () => {
         try {
             setLoadingProducts(true);
-            const response = await axios.get("http://localhost:8001/product", {
+            const response = await axios.get(`${URL}/ product`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setData(response.data.allproduct); // ตรวจสอบว่าข้อมูลที่ได้รับมีอยู่จริง
@@ -67,11 +69,11 @@ const RecommendedProducts = () => {
             if (existingCartItem) { //ถ้ากดซ้ำ
                 updateCartQuantityOnAdd(productId, 1);
             } else {
-                await axios.post("http://localhost:8001/cart", { productId, amount: 1 }, {
+                await axios.post(`${URL}/cart`, { productId, amount: 1 }, {
                     headers: { Authorization: `Bearer ${token}` }
                 }); //สร้างแล้ว
 
-                const response = await axios.get("http://localhost:8001/cart", {
+                const response = await axios.get(`${URL}/cart`, {
                     headers: { Authorization: `Bearer ${token}` }
                 }); //ดึงของในtable cartItem
 
@@ -103,7 +105,7 @@ const RecommendedProducts = () => {
         setCartItems(updatedItems);
 
         try {
-            await axios.patch(`http://localhost:8001/cart/${productId}`, { amount }, {
+            await axios.patch(`${URL}/cart/${productId}`, { amount }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
         } catch (err) {

@@ -6,6 +6,7 @@ import ViewHistoryDetailModal from './ViewHistoryDetailModal';
 import viewbutton from '../../assets/viewhistorybutton2.gif';
 import bggradientgray from '../../assets/gradientbg2gray.gif';
 
+const URL = import.meta.env.VITE_API_URL
 export default function HistoryShop() {
     const user = useAuthStore(state => state.user);
     const token = useAuthStore(state => state.token);
@@ -16,7 +17,7 @@ export default function HistoryShop() {
         if (user) {
             const fetchPaymentHistory = async () => {
                 try {
-                    const paymentResponse = await axios.get(`http://localhost:8001/history/getpayment/${user.id}`, {
+                    const paymentResponse = await axios.get(`${URL}/history/getpayment/${user.id}`, {
                         headers: {
                             Authorization: `Bearer ${token}`
                         }
@@ -37,7 +38,7 @@ export default function HistoryShop() {
 
     const fetchOrderDetails = async (orderId) => {
         try {
-            const response = await axios.get(`http://localhost:8001/history/getorderdetail/${orderId}`, {
+            const response = await axios.get(`${URL}/history/getorderdetail/${orderId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

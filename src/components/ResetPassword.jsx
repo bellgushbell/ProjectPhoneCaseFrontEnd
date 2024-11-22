@@ -4,6 +4,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import useAuthStore from '../stores/authStore';
 import { useNavigate, useParams } from 'react-router-dom';
+const URL = import.meta.env.VITE_API_URL
 
 export default function Resetpassword() {
     const email = useAuthStore((state) => state.ResetPasswordEmail);
@@ -24,7 +25,7 @@ export default function Resetpassword() {
                 return;
             }
             try {
-                await axios.get(`http://localhost:8001/auth/verify-reset-token/${token}`);
+                await axios.get(`${URL}/auth/verify-reset-token/${token}`);
             } catch (error) {
                 console.error('Invalid token:', error);
                 navigate('/pagenotfound');
@@ -50,7 +51,7 @@ export default function Resetpassword() {
             return;
         }
         try {
-            await axios.patch("http://localhost:8001/auth/reset-password", input);
+            await axios.patch(`${URL}/auth/reset-password`, input);
             toast.success("Password reset successful");
         } catch (err) {
             toast.error("Failed to reset password");

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import useAuthStore from '../stores/authStore';
+const URL = import.meta.env.VITE_API_URL
 
 export default function ForgotPasswordModal() {
     const [input, setInput] = useState({
@@ -16,7 +17,7 @@ export default function ForgotPasswordModal() {
     const handleModalEmailSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post("http://localhost:8001/auth/forgot-password", { email: input.email });
+            await axios.post(`${URL}/auth/forgot-password`, { email: input.email });
             setEmailForReset(input.email); // บันทึกอีเมลใน store
             toast.success("Email sent successfully 📧");
         } catch (err) {

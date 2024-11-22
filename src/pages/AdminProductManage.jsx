@@ -9,6 +9,8 @@ import editbutton from '../assets/editbutton.gif';
 import Editloading from '../components/loading/Editloading';
 import Loading from '../components/loading/Loading';
 
+const URL = import.meta.env.VITE_API_URL
+
 const AdminProductManage = () => {
     const token = useAuthStore(state => state.token);
     const [data, setData] = useState([]);
@@ -34,7 +36,7 @@ const AdminProductManage = () => {
     const fetchProducts = async () => {
         try {
             setLoading(true);
-            const response = await axios.get("http://localhost:8001/product", {
+            const response = await axios.get(`${URL}/product`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setData(response.data.allproduct);
@@ -49,7 +51,7 @@ const AdminProductManage = () => {
 
     const fetchCategories = async () => {
         try {
-            const response = await axios.get('http://localhost:8001/admin/categories', {
+            const response = await axios.get(`${URL}/admin/categories`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setCategories(response.data);
@@ -120,7 +122,7 @@ const AdminProductManage = () => {
                 updatedData.append('image', formData.image); // ส่งไฟล์ที่เลือก
             }
 
-            await axios.patch(`http://localhost:8001/admin/edit-products/${productId}`, updatedData, {
+            await axios.patch(`${URL}/admin/edit-products/${productId}`, updatedData, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -152,7 +154,7 @@ const AdminProductManage = () => {
         if (result.isConfirmed) {
             setLoading(true);
             try {
-                await axios.delete(`http://localhost:8001/admin/manage-products/${productId}`, {
+                await axios.delete(`${URL}/admin/manage-products/${productId}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 toast.success("Product deleted successfully");

@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import useAuthStore from '../../stores/authStore';
 
+const URL = import.meta.env.VITE_API_URL
+
 export default function PaymentDetail() {
     const { orderId, paymentId } = useParams();
     const [payment, setPayment] = useState(null);
@@ -12,7 +14,7 @@ export default function PaymentDetail() {
     // ฟังก์ชันดึงข้อมูลการชำระเงิน
     const fetchPaymentDetail = async () => {
         try {
-            const response = await axios.get(`http://localhost:8001/payment/order/${orderId}/payment/${paymentId}`, {
+            const response = await axios.get(`${URL}/payment/order/${orderId}/payment/${paymentId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

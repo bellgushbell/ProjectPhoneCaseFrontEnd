@@ -4,15 +4,17 @@ import useAuthStore from '../../stores/authStore';
 import { motion } from 'framer-motion'; // นำเข้า motion
 import { DeleteUserBin } from '../../icons';
 
+const URL = import.meta.env.VITE_API_URL
 export default function AdminManagePayment() {
     const [payments, setPayments] = useState([]);
     const [selectedSlip, setSelectedSlip] = useState(null);
     const [isModalOpen, setModalOpen] = useState(false);
-    const token = useAuthStore(state => state.token);
+    const token = useAuthStore(state => state.token)
+
 
     const fetchPayments = async () => {
         try {
-            const response = await axios.get('http://localhost:8001/admin/manage-payments', {
+            const response = await axios.get(`${URL}/admin/manage-payments`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setPayments(response.data.payments);
@@ -27,7 +29,7 @@ export default function AdminManagePayment() {
 
     const handleStatusChange = async (paymentId, newStatus) => {
         try {
-            await axios.patch(`http://localhost:8001/admin/manage-payments/${paymentId}`, { status: newStatus }, {
+            await axios.patch(`${URL}/admin/manage-payments/${paymentId}`, { status: newStatus }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             fetchPayments()
@@ -38,7 +40,7 @@ export default function AdminManagePayment() {
 
     const handlePaymentMethodChange = async (paymentId, newMethod) => {
         try {
-            await axios.patch(`http://localhost:8001/admin/manage-paymentsmethod/${paymentId}`, { payment_method: newMethod }, {
+            await axios.patch(`${URL}/admin/manage-paymentsmethod/${paymentId}`, { payment_method: newMethod }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             fetchPayments()
@@ -49,7 +51,7 @@ export default function AdminManagePayment() {
 
     const handleDeletePayment = async (paymentId) => {
         try {
-            await axios.delete(`http://localhost:8001/admin/manage-payments/${paymentId}`, {
+            await axios.delete(`${URL}/admin/manage-payments/${paymentId}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             fetchPayments()

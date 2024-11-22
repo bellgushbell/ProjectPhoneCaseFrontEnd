@@ -11,6 +11,7 @@ import LoadingConfirm from '../loading/Loading-confirmOrder'
 import Loading from '../loading/Loading'
 import useCartStore from '../../stores/cartStore';
 
+const URL = import.meta.env.VITE_API_URL
 const OrderInfo = () => {
     const [orderSummary, setOrderSummary] = useState(null);
     const token = useAuthStore(state => state.token);
@@ -23,7 +24,7 @@ const OrderInfo = () => {
     useEffect(() => {
         const fetchOrderId = async () => {
             try {
-                const response = await axios.get('http://localhost:8001/order/getorderidlastest', {
+                const response = await axios.get(`${URL}//order/getorderidlastest`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
 
@@ -66,7 +67,7 @@ const OrderInfo = () => {
             }
 
             // ส่ง PATCH request ไปยังเซิร์ฟเวอร์
-            const confirmOrderResponse = await axios.patch(`http://localhost:8001/order/confirmorder/${validOrderId}`, {}, {
+            const confirmOrderResponse = await axios.patch(`${URL}//order/confirmorder/${validOrderId}`, {}, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             console.log(confirmOrderResponse);
@@ -89,7 +90,7 @@ const OrderInfo = () => {
 
     const handleCancelOrder = async () => {
         try {
-            const response = await axios.patch(`http://localhost:8001/order/cancelorder`, { //ส้ง body orderIdไป 
+            const response = await axios.patch(`${URL} /order/cancelorder`, { //ส้ง body orderIdไป 
                 orderId: orderSummary.orderId,
             }, {
                 headers: { Authorization: `Bearer ${token}` }
