@@ -25,7 +25,7 @@ const RecommendedProducts = () => {
     const fetchProducts = async () => {
         try {
             setLoadingProducts(true);
-            const response = await axios.get(`${URL}/ product`, {
+            const response = await axios.get(`${URL}/product`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setData(response.data.allproduct); // ตรวจสอบว่าข้อมูลที่ได้รับมีอยู่จริง
