@@ -1,4 +1,10 @@
 # React + Vite
+env guide
+# VITE_API_URL=http://localhost:8001
+VITE_API_URL=https://projectphonecasefrontend.onrender.com
+
+
+
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
