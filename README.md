@@ -1,6 +1,6 @@
 # React + Vite
 env guide
-# VITE_API_URL=http://localhost:8001
+<!-- VITE_API_URL=http://localhost:8001 -->
 VITE_API_URL=https://projectphonecasefrontend.onrender.com
 
 
